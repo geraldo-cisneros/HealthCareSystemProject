@@ -32,7 +32,6 @@ public class CancelAppointment extends javax.swing.JFrame {
         docList.addItem("C, Loya");
         docList.addItem("D, Skinner");
         docList.addItem("K, Wang");
-        
     }
 
     /**
