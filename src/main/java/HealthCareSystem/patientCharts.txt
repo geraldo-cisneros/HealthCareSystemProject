@@ -1,0 +1,6 @@
+Jim James 11/12/1998
+Phone = 123-123-1231
+Insurance = BCBS
+Address = 111 st
+Doctor = J, Ward
+SSN = 112-11-1112

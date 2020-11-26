@@ -4,14 +4,21 @@
  * and open the template in the editor.
  */
 package HealthCareSystem;
+import HealthCareSystem.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 /**
@@ -185,17 +192,6 @@ public class CancelAppointment extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No appointment found, check appointment details or create a new appointment.");
             this.dispose();
         }
-        
-//copy all appointments except for matching appointment to new file then save new file as 
-//old file
-
-        //while (has line){
-            //if (line != appt){
-                //write line to new file
-                //save new file as old file
-            //}
-        //}
-
     }//GEN-LAST:event_cancelApptActionPerformed
     public static Boolean findAppointment(String infile, String appt){
         Boolean found = false;
@@ -229,7 +225,7 @@ public class CancelAppointment extends javax.swing.JFrame {
                // Boolean found = false;
                 while (myReader.hasNextLine()) {
                     line = myReader.nextLine();
-                    if (!appt.equals(line)){
+                    if (!line.equals(appt)){
                         try {
                             FileWriter myWriter = new FileWriter(outfile, true);
                             myWriter.write(line + "\n");
@@ -239,9 +235,6 @@ public class CancelAppointment extends javax.swing.JFrame {
                             e.printStackTrace();
                         }
                     }
-    //                if(appt.equals(line)){
-    //                    found = true;
-    //                }
                 }
                 //save temp file as old file delete temp file contents
                 newFile.renameTo(oldFile);            
@@ -251,6 +244,82 @@ public class CancelAppointment extends javax.swing.JFrame {
                 e.printStackTrace();
             } 
     }
+    
+    public static void updateDataFile(String outfile, String infile, String deletefile) throws FileNotFoundException, IOException{
+        { 
+        // PrintWriter object for output.txt 
+        PrintWriter pw = new PrintWriter(outfile); 
+        File pwf = new File(outfile);
+        File old = new File(infile);
+        // BufferedReader object for delete.txt 
+        BufferedReader br2 = new BufferedReader(new FileReader(deletefile)); 
+          
+        String line2 = br2.readLine(); 
+          
+        // hashset for storing lines of delete.txt 
+        HashSet<String> hs = new HashSet<String>(); 
+          
+        // loop for each line of delete.txt 
+        while(line2 != null) 
+        { 
+            hs.add(line2); 
+            line2 = br2.readLine(); 
+        } 
+                      
+        // BufferedReader object for input.txt 
+        BufferedReader br1 = new BufferedReader(new FileReader(infile)); 
+          
+        String line1 = br1.readLine(); 
+          
+        // loop for each line of input.txt 
+        while(line1 != null) 
+        { 
+            // if line is not present in delete.txt 
+            // write it to output.txt 
+            if(!hs.contains(line1)) 
+                pw.println(line1 + "\n"); 
+            System.out.println(line1);
+              
+            line1 = br1.readLine(); 
+        } 
+          
+        pw.flush();
+        pwf.renameTo(old);
+        
+        // closing resources 
+        br1.close(); 
+        br2.close(); 
+        pw.close(); 
+          
+        System.out.println("File operation performed successfully"); 
+    }
+        
+    }
+    public static String getAppointment(String n){
+        TreatmentRecord tr = new TreatmentRecord();
+        String line = " " , record = " ";
+        Boolean found = false;
+        try{
+            File charts = new File("src/main/java/HealthCareSystem/appointments.txt");
+            Scanner scanner = new Scanner(charts);
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                if((line.split(" ")[0] + " " + line.split(" ")[1]).equals(n));
+                    found = true;
+                }
+            if (!found){
+                    JOptionPane.showMessageDialog(null, "Patient treatment record not found");
+            }
+            record = line;
+            
+        }catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return record; 
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

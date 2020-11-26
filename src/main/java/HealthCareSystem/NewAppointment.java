@@ -160,19 +160,16 @@ public class NewAppointment extends javax.swing.JFrame {
             String doc = docList.getSelectedItem().toString();
             String d = date.getText();
             String t = time.getText();
+            String appFile = "src/main/java/HealthCareSystem/appointments.txt";
+            String docFile = "src/main/java/HealthCareSystem/docAvailability.txt";
+            String type = "Appointment";
+            String data = first + " " + last + " " + doc + " "+ d + " " + t + "\n";
             
-            try {
-                FileWriter myWriter = new FileWriter("src/main/java/HealthCareSystem/appointments.txt", true);
-                myWriter.write(first + " " + last + " " + doc + " "+ d + " " + t + "\n");
-                myWriter.close();
-                myWriter = new FileWriter("src/main/java/HealthCareSystem/docAvailability.txt", true);
-                myWriter.write(doc + " " + d + " " + t + "\n");
-                myWriter.close();
-                JOptionPane.showMessageDialog(null, "Appointment Successfully Scheduled");
-            }catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
+            writeToFile(appFile, data, type, false);
+            
+            data = doc + " "+ d + " " + t + "\n";
+            
+            writeToFile(docFile, data, type, true);
             this.dispose();
            
     }//GEN-LAST:event_submitNewApptActionPerformed
@@ -181,6 +178,19 @@ public class NewAppointment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
 
+    public static void writeToFile(String setfile, String data, String type, Boolean showPane ){
+        try {
+            FileWriter myWriter = new FileWriter(setfile, true);
+            myWriter.write(data);
+            myWriter.close();
+            if (showPane){
+                JOptionPane.showMessageDialog(null, type + " Successfully Recorded");
+            }
+        }catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+    }
     /**
      * @param args the command line arguments
      */

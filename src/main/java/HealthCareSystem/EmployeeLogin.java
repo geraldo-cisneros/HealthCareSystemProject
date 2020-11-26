@@ -11,6 +11,8 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 /**
@@ -20,7 +22,6 @@ import java.util.Scanner; // Import the Scanner class to read text files
 public class EmployeeLogin extends javax.swing.JFrame {
     Connection conn = null; 
     PreparedStatement pst = null; 
-    String[] employee = new String[1];
 
     /**
      * Creates new form EmployeeLogin
@@ -46,8 +47,8 @@ public class EmployeeLogin extends javax.swing.JFrame {
         empIDLabel = new javax.swing.JLabel();
         empID = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
-        password = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,12 +69,6 @@ public class EmployeeLogin extends javax.swing.JFrame {
 
         passwordLabel.setText("Password");
 
-        password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Health Care System");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -88,10 +83,10 @@ public class EmployeeLogin extends javax.swing.JFrame {
                             .addComponent(empIDLabel)
                             .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(loginButton)
-                            .addComponent(empID, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(empID, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                            .addComponent(password)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
                         .addComponent(jLabel1)))
@@ -118,63 +113,79 @@ public class EmployeeLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
             String user = empID.getText();
             String pass = password.getText();
             MainInterface m = new MainInterface();
-            
-            employee[0] = user;
+            Boolean found = false;
+
+           
             try {
                 File empAccounts = new File("src/main/java/HealthCareSystem/newfile.txt");
                 Scanner myReader = new Scanner(empAccounts);
                 String line;
                 String userPass = user + ' ' + pass;
-                Boolean found = false;
+                
                 while (myReader.hasNextLine()) {
                     line = myReader.nextLine();
                     System.out.println(line);
                     System.out.println(userPass);
                     if (userPass.equals(line)){
                         JOptionPane.showMessageDialog(null, "Username and Password Successful");
+                        try {
+                            FileWriter myWriter = new FileWriter("src/main/java/HealthCareSystem/loggedIn.txt");
+                            myWriter.write(user);
+                            myWriter.close();
+                        }catch (IOException e) {
+                            System.out.println("An error occurred.");
+                            e.printStackTrace();
+                        }
                         found = true;
                         myReader.close();
+                        m.currentlyLoggedIn.setText(user);
                         m.setVisible(true);
                         this.dispose();      
                     }
                 }
-                if (found == false){
-                    JOptionPane.showMessageDialog(null, "Invalid Username or Password");
-                }
+                
             myReader.close();
             } catch (FileNotFoundException e) {
                   System.out.println("An error occurred.");
                   e.printStackTrace();
-                }
+            }
+            if (found == false){
+                    JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+            }
              
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    public static Boolean checkCredentials(int reqAccess){
-        Boolean accessGranted = false; 
-       
-        
-        //on login
-            //write login id to file
-            //set currentlyloggedin to id in file;
-            
-            //if id < reqAccess
-                //return false
-                //display access denied message
-            //else
-                //return true
-            //switch{
+    public static Boolean checkCredentials(int reqAccessMin, int reqAccessMax){
+        Boolean accessGranted = false;
+        String sub;
+        try{
+            File empAccounts = new File("src/main/java/HealthCareSystem/loggedIn.txt");
+            Scanner myReader = new Scanner(empAccounts);
+            String line;
+            line = myReader.nextLine();
+            sub = line.substring(0, 2);
+            int i = Integer.parseInt(sub);
+            if (i > reqAccessMin && i < reqAccessMax ){
+                accessGranted = true;
+            }
+            else{
+                accessGranted = false;
+            }
+            System.out.println(sub);
+              
+        } catch (FileNotFoundException e) {
+                 System.out.println("An error occurred.");
+                 e.printStackTrace();
+        }
         return accessGranted;
-            
     }
+    
+    
     private void empIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empIDActionPerformed
         // TODO add your handling code here:
         
@@ -221,7 +232,7 @@ public class EmployeeLogin extends javax.swing.JFrame {
     private javax.swing.JLabel empIDLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JLabel passwordLabel;
     // End of variables declaration//GEN-END:variables
 }
