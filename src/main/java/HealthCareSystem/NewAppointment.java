@@ -178,13 +178,17 @@ public class NewAppointment extends javax.swing.JFrame {
             String type = "Appointment";
             String data = first + " " + last + " " + bd + " " + doc + " "+ d + " " + t + "\n";
             
-            writeToFile(appFile, data, type, false);
+            Boolean available = UpdateAppointment.docAvail(doc, d, t);
             
-            data = doc + " "+ d + " " + t + "\n";
-            
-            writeToFile(docFile, data, type, true);
-            this.dispose();
-           
+            if(!available){
+                writeToFile(appFile, data, type, true);
+                data = doc + " "+ d + " " + t;
+                writeToFile(docFile, data, type, true); 
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Doctor is not available at that time and date.");
+            }
     }//GEN-LAST:event_submitNewApptActionPerformed
 
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed

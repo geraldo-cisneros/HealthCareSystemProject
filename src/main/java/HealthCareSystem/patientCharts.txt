@@ -1,24 +1,12 @@
-Joe Smith 12/12/1998
-Phone = 333-333-3333
+Jim James 11/12/1998
+Phone = 806-449-4393
 Insurance = BCBS
-Address = 111 new st
-Doctor = D, Skinner
-SSN = 222-22-2222
-Jim James 11/12/1995
-Phone = 806-223-2929
-Insurance = BCBS
-Address = 213 1st st
+Address = 139 21st 
 Doctor = J, Ward
-SSN = 232-22-2323
-Chris Garza 11/12/1991
-Phone = 432-223-2332
-Insurance = United Healthcare
-Address = 233 45th st
+SSN = 943-39-2323
+Ellie Ward 11/28/1998
+Phone = 233-232-2323
+Insurance = Aetna
+Address = 1213 13th
 Doctor = C, Loya
-SSN = 923-22-2323
-Haley Reese 11/23/1993
-Phone = 888-888-8888
-Insurance = BCBS
-Address = 233 32nd st
-Doctor = K, Wang
-SSN = 232-23-2323
+SSN = 234-22-3213

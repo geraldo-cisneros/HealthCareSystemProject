@@ -59,6 +59,7 @@ public class MainInterface extends javax.swing.JFrame {
         logoutButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         clearScheduleButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,11 +203,23 @@ public class MainInterface extends javax.swing.JFrame {
         });
 
         jButton1.setText("Switch User");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         clearScheduleButton.setText("Clear Schedule");
         clearScheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearScheduleButtonActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("View Schedule");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -224,7 +237,8 @@ public class MainInterface extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(clearScheduleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -239,7 +253,9 @@ public class MainInterface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clearScheduleButton)))
+                        .addComponent(clearScheduleButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -345,6 +361,31 @@ public class MainInterface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_clearScheduleButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        EmployeeLogin e = new EmployeeLogin();
+                e.setVisible(true);
+                this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+                File file = new File("src/main/java/HealthCareSystem/appointments.txt");
+                
+                //first check if Desktop is supported by Platform or not
+                if(!Desktop.isDesktopSupported()){
+                    System.out.println("Desktop is not supported");
+                    return;
+                }
+                
+                Desktop desktop = Desktop.getDesktop();
+                if(file.exists()) desktop.open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void clearNoShowAppointments(String d){
         try {   
                 String temp = "src/main/java/HealthCareSystem/temp.txt";
@@ -423,6 +464,7 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JButton clearScheduleButton;
     public javax.swing.JLabel currentlyLoggedIn;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -193,6 +193,7 @@ public class UpdateAppointment extends javax.swing.JFrame {
         String appt = first + " " + last + " " + bday + " " + doc + " " + d + " " + t + "\n";
         
         Boolean found = docAvail(doc, d, t);
+        System.out.println("HERE ");
         
         if (!found){
             try {
@@ -220,15 +221,15 @@ public class UpdateAppointment extends javax.swing.JFrame {
                 File appointments = new File("src/main/java/HealthCareSystem/docAvailability.txt");
                 Scanner myReader = new Scanner(appointments);
                 String line;
-                String appt = doc + ' ' + d + ' ' + t;
+                String appt = doc + " " + d + " " + t;
                 
                 while (myReader.hasNextLine()) {
                     line = myReader.nextLine();
                     if (line.equals(appt)){
-                        found = true;
-                        myReader.close();
+                        found = true;   
                     }
                 }
+                myReader.close();
             } catch (FileNotFoundException e) {
                   System.out.println("An error occurred.");
                   e.printStackTrace();

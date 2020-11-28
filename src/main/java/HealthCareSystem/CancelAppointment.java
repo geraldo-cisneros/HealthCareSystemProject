@@ -296,26 +296,27 @@ public class CancelAppointment extends javax.swing.JFrame {
         
     }
     public static String getAppointment(String n, String file, String type){
-        TreatmentRecord tr = new TreatmentRecord();
         String line = " " , record = " ";
         Boolean found = false;
         try{
             File charts = new File(file);
             Scanner scanner = new Scanner(charts);
-            while (scanner.hasNextLine()) {
-                line = scanner.nextLine();
-                if(line.contains(n) || line.equals(n));
-                    found = true;
+                while (scanner.hasNextLine()) {
+                    line = scanner.nextLine();
+                    if(line.contains(n) || line.equals(n)){
+                        found = true;
+                        record = line;
                 }
+            }
             if (!found){
                     JOptionPane.showMessageDialog(null, type + " not found");
             }
-            record = line;
-            
+          
         }catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        System.out.println("*** "+ record);
         return record; 
     }
     /**
