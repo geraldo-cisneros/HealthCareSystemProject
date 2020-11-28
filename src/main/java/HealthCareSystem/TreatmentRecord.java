@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package HealthCareSystem;
-
+import static HealthCareSystem.CancelAppointment.getAppointment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,26 +51,25 @@ public class TreatmentRecord extends javax.swing.JFrame {
         BirthDate = new javax.swing.JLabel();
         Height = new javax.swing.JTextField();
         Weight = new javax.swing.JTextField();
+        BloodPressure = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Treatment Record");
 
-        pFName.setText("jLabel9");
-        pFName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "First Name", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        pFName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "First Name", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        pLName.setText("jLabel9");
-        pLName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Last Name", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        pLName.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Last Name", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         Treatment.setColumns(20);
         Treatment.setRows(5);
         Treatment.setText("\n");
-        Treatment.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Treatment", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        Treatment.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Treatment", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jScrollPane1.setViewportView(Treatment);
 
         Prescriptions.setColumns(20);
         Prescriptions.setRows(5);
-        Prescriptions.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prescriptions", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        Prescriptions.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Prescriptions", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jScrollPane2.setViewportView(Prescriptions);
 
         saveButton.setText("Save");
@@ -89,65 +88,76 @@ public class TreatmentRecord extends javax.swing.JFrame {
 
         ReasonForVisit.setColumns(20);
         ReasonForVisit.setRows(5);
-        ReasonForVisit.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reason For Visit", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        ReasonForVisit.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Reason For Visit", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jScrollPane3.setViewportView(ReasonForVisit);
 
-        BirthDate.setText("jLabel9");
-        BirthDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Birth Date", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        BirthDate.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Birth Date", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        Height.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Height", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        Height.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Height", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        Weight.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Weight", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        Weight.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Weight", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        BloodPressure.setActionCommand("<Not Set>");
+        BloodPressure.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Blood Pressure", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        BloodPressure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BloodPressureActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(closeButton)
-                .addGap(53, 53, 53)
-                .addComponent(saveButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pFName, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(Height))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pLName, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(Weight))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pFName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pLName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Height, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(191, 191, 191)
-                                .addComponent(jLabel1)))
+                            .addComponent(BirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addContainerGap(77, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(closeButton)
+                        .addGap(53, 53, 53)
+                        .addComponent(saveButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pFName)
-                    .addComponent(pLName)
-                    .addComponent(BirthDate))
-                .addGap(36, 36, 36)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pFName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pLName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Height, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -172,13 +182,14 @@ public class TreatmentRecord extends javax.swing.JFrame {
         String bday = BirthDate.getText();
         String ht = Height.getText();
         String wt = Weight.getText();
+        String bp = BloodPressure.getText();
         String reason = ReasonForVisit.getText();
         String treatment = Treatment.getText();
         String rx = Prescriptions.getText();
         String flbday = first + " " + last + " " + bday;
         String newData = "###\n" + first + " " + last + " " + bday + "\n" +
-                         "Height = " + ht + "\nWeight = " + wt + "\nReason = " + reason +
-                         "\nTreatment = " + treatment + "\nRx = " + rx +"\n###\n" ;
+                         "Height = " + ht + "\nWeight = " + wt + "\nBlood Pressure = " + bp +
+                         "\nReason = " + reason + "\nTreatment = " + treatment + "\nRx = " + rx +"\n###\n" ;
         
                 
         String recordfile = "src/main/java/HealthCareSystem/treatmentRecords.txt";
@@ -203,11 +214,16 @@ public class TreatmentRecord extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void BloodPressureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BloodPressureActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BloodPressureActionPerformed
     
     public static void findTreatmentRecord(String n){
         TreatmentRecord tr = new TreatmentRecord();
         Map<String, String> treatmentMap = new LinkedHashMap<String, String>();
-        String line, idString;
+        String f = " ",l = " ",bday = " ",h = " ",w = " ",bp = " ",reason = " ",treatment = " ",rx = " ";
+        String line = " ", idString;
         idString = getEmpID();
         Character c = idString.charAt(1);
         Integer id = Character.getNumericValue(c);
@@ -219,20 +235,37 @@ public class TreatmentRecord extends javax.swing.JFrame {
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
                 if(line.equals(n)){
-                    found = true;
-                    tr.setVisible(true);
-                    if (id == 2){
-                        tr.Treatment.disable();
-                        tr.Prescriptions.disable();
+                    System.out.println(line);
+                    found = true; 
+                    f = line.split(" ")[0];
+                    l = line.split(" ")[1];
+                    bday = line.split(" ")[2];
+                    h = scanner.nextLine().split(" =")[1];
+                    w = scanner.nextLine().split(" =")[1];
+                    bp = scanner.nextLine().split(" =")[1];
+                    reason = scanner.nextLine().split(" =")[1];
+                    treatment = scanner.nextLine().split(" =")[1];
+                    rx = scanner.nextLine().split(" =")[1];
+                }
+            }
+            if (found){
+                if (id == 2){
+                      UpdateMeasurements um = new UpdateMeasurements();
+                      String vars = f + " " + l + " " + bday + " " + h + " " + w + " " + bp;
+                      System.out.println(vars);
+                      UpdateMeasurements.setMeasurements(vars, reason, treatment, rx);
                     }
-                    tr.pFName.setText(line.split(" ")[0]);
-                    tr.pLName.setText(line.split(" ")[1]);
-                    tr.BirthDate.setText(line.split(" ")[2]);
-                    tr.Height.setText(scanner.nextLine().split(" =")[1]);
-                    tr.Weight.setText(scanner.nextLine().split(" =")[1]);
-                    tr.ReasonForVisit.setText(scanner.nextLine().split(" =")[1]);
-                    tr.Treatment.setText(scanner.nextLine().split(" =")[1]);
-                    tr.Prescriptions.setText(scanner.nextLine().split(" =")[1]);
+                else{
+                    tr.setVisible(true);
+                    tr.pFName.setText(f);
+                    tr.pLName.setText(l);
+                    tr.BirthDate.setText(bday);
+                    tr.Height.setText(h);
+                    tr.Weight.setText(w);
+                    tr.BloodPressure.setText(bp);
+                    tr.ReasonForVisit.setText(reason);
+                    tr.Treatment.setText(treatment);
+                    tr.Prescriptions.setText(rx);
                 }
             }
             if (!found){
@@ -248,8 +281,6 @@ public class TreatmentRecord extends javax.swing.JFrame {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-         tr.setVisible(true);
-        
     }
     public static Boolean recordExists(String n, String searchFile){
         Boolean found = false;
@@ -259,7 +290,7 @@ public class TreatmentRecord extends javax.swing.JFrame {
             Scanner scanner = new Scanner(charts);
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
-                if(line.equals(n)){
+                if(line.contains(n) || line.equals(n)){
                     found = true;            
                 }
             }
@@ -273,7 +304,8 @@ public class TreatmentRecord extends javax.swing.JFrame {
         TreatmentRecord tr = new TreatmentRecord();
         Map<String, String> treatmentMap = new LinkedHashMap<String, String>();
         String line;
-        String firstlastbday = " ", ht= " ", wt= " ", reason= " ", treatment = " ", rx = " ", record = " ";
+        String firstlastbday = " ", ht= " ", wt= " ",bp = " ",  
+               reason= " ", treatment = " ", rx = " ", record = " ";
         Boolean found = false;
         try{
             File charts = new File("src/main/java/HealthCareSystem/treatmentRecords.txt");
@@ -286,6 +318,7 @@ public class TreatmentRecord extends javax.swing.JFrame {
                     firstlastbday = line;
                     ht = scanner.nextLine();
                     wt = scanner.nextLine();
+                    bp = scanner.nextLine();
                     reason = scanner.nextLine();
                     treatment = scanner.nextLine();
                     rx = scanner.nextLine();
@@ -296,7 +329,7 @@ public class TreatmentRecord extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Patient treatment record not found");
             }
             record = "###\n" + firstlastbday + "\n" +
-                            ht + "\n" + wt + "\n" + reason + 
+                            ht + "\n" + wt + "\n" + bp + "\n" + reason + 
                             "\n" + treatment + "\n" + rx + "\n###\n";
             
         }catch (FileNotFoundException e) {
@@ -358,6 +391,7 @@ public class TreatmentRecord extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BirthDate;
+    private javax.swing.JTextField BloodPressure;
     private javax.swing.JTextField Height;
     private javax.swing.JTextArea Prescriptions;
     private javax.swing.JTextArea ReasonForVisit;

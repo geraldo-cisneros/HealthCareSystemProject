@@ -1,0 +1,23 @@
+Patient ID: hsc-SJ954
+Date: 11/27/2020
+Amount: $20.00
+Insurance: Insurance = GEHA
+Reference Number: HCS240401
+Patient ID: hsc-JS982
+Date: 11/27/2020
+Amount: $20.00
+Insurance: Insurance = BCBS
+Reference Number: HCS003243
+Patient ID: hsc-HR932
+Date: 11/28/2020
+Amount: $20.00
+Insurance: Insurance = 
+Payment Type: 
+Reference Number: HCS313221
+
+Patient ID: hsc-HR932
+Date: 11/28/2020
+Amount: $20.00
+Insurance: Insurance = BCBS
+Payment Type: 
+Reference Number: HCS040131

@@ -49,17 +49,24 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                      <Component id="checkIn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="FindChart" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="closeButton" min="-2" pref="159" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="checkIn" min="-2" pref="157" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="viewPatientChartButton" min="-2" pref="158" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="makePaymentButton" min="-2" pref="158" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="176" max="32767" attributes="0"/>
+              <EmptySpace pref="113" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,12 +103,15 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="checkIn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="FindChart" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="checkIn" max="32767" attributes="0"/>
+                  <Component id="makePaymentButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="viewPatientChartButton" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="102" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="closeButton" min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -146,18 +156,34 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="FindChart">
+    <Component class="javax.swing.JButton" name="viewPatientChartButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Patient Chart"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FindChartActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewPatientChartButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Find Patient"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="closeButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Close"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="makePaymentButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Make Payment"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="makePaymentButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

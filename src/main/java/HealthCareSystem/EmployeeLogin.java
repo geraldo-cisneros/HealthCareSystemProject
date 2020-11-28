@@ -13,6 +13,11 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.Double.parseDouble;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 /**
@@ -112,7 +117,7 @@ public class EmployeeLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
             String user = empID.getText();
@@ -120,19 +125,18 @@ public class EmployeeLogin extends javax.swing.JFrame {
             MainInterface m = new MainInterface();
             Boolean found = false;
 
-           
             try {
-                File empAccounts = new File("src/main/java/HealthCareSystem/newfile.txt");
+                File empAccounts = new File("src/main/java/HealthCareSystem/employeeLogin.txt");
                 Scanner myReader = new Scanner(empAccounts);
                 String line;
-                String userPass = user + ' ' + pass;
+                String userPass = user + " " + pass;
                 
                 while (myReader.hasNextLine()) {
                     line = myReader.nextLine();
                     System.out.println(line);
                     System.out.println(userPass);
                     if (userPass.equals(line)){
-                        JOptionPane.showMessageDialog(null, "Username and Password Successful");
+                        found = true;
                         try {
                             FileWriter myWriter = new FileWriter("src/main/java/HealthCareSystem/loggedIn.txt");
                             myWriter.write(user);
@@ -140,8 +144,7 @@ public class EmployeeLogin extends javax.swing.JFrame {
                         }catch (IOException e) {
                             System.out.println("An error occurred.");
                             e.printStackTrace();
-                        }
-                        found = true;
+                        }                        
                         myReader.close();
                         m.currentlyLoggedIn.setText(user);
                         m.setVisible(true);
@@ -185,7 +188,45 @@ public class EmployeeLogin extends javax.swing.JFrame {
         return accessGranted;
     }
     
-    
+    public static void generateDailyReport(){
+        LocalDate date = LocalDate.now();
+        
+        String d = date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        Double total = 0.00;
+        Double val = 0.00;
+        Integer count = 0;
+        String data = " ";
+        String file = "src/main/java/HealthCareSystem/dailyReport.txt";
+         try {
+                File appointments = new File("src/main/java/HealthCareSystem/paymentInfo.txt");
+                Scanner myReader = new Scanner(appointments);
+                String line;
+                while (myReader.hasNextLine()) {
+                    line = myReader.nextLine();
+                    if (line.contains("Amount")){
+                        val = parseDouble(line.substring(9));
+                        total += val;
+                        count ++;
+                        
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                  System.out.println("An error occurred.");
+                  e.printStackTrace();
+            }
+         data = "**************************\n"+
+                "DAILY REPORT FOR " + d + "\n"+
+                "**************************\n"+
+                "Total Revenue: $" + String.format("%.2f", total) + "\n" +
+                "Total Patients Seen: " + count + "\n";
+         
+         ViewPatientChart.storeWriteData(data, file, false);
+        //if time = x
+            //while line.contains("Amount"){
+                //total += Integer.parseInt(line.split($)[1]);
+            //get number of patients seen
+            //get total revenue 
+    }
     private void empIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empIDActionPerformed
         // TODO add your handling code here:
         
@@ -196,29 +237,12 @@ public class EmployeeLogin extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        Calendar cal = Calendar.getInstance();
+        int currentHour = cal.get(Calendar.HOUR);
+        if (currentHour > 3) {
+           generateDailyReport();
+    //then rock on
         }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

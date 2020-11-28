@@ -8,12 +8,15 @@ package HealthCareSystem;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -52,8 +55,10 @@ public class CheckIn extends javax.swing.JFrame {
         pLName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         birthdate = new javax.swing.JFormattedTextField();
-        FindChart = new javax.swing.JButton();
+        viewPatientChartButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        closeButton = new javax.swing.JButton();
+        makePaymentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,14 +83,28 @@ public class CheckIn extends javax.swing.JFrame {
 
         birthdate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("M/d/yyyy"))));
 
-        FindChart.setText("View Patient Chart");
-        FindChart.addActionListener(new java.awt.event.ActionListener() {
+        viewPatientChartButton.setText("View Patient Chart");
+        viewPatientChartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FindChartActionPerformed(evt);
+                viewPatientChartButtonActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Find Patient");
+
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+
+        makePaymentButton.setText("Make Payment");
+        makePaymentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makePaymentButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,14 +130,19 @@ public class CheckIn extends javax.swing.JFrame {
                             .addComponent(pLName)
                             .addComponent(birthdate, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(checkIn)
-                        .addGap(41, 41, 41)
-                        .addComponent(FindChart))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(305, 305, 305)
-                        .addComponent(jLabel5)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkIn, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(viewPatientChartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(makePaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +169,14 @@ public class CheckIn extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkIn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FindChart, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(checkIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(makePaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewPatientChartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -160,7 +187,7 @@ public class CheckIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pFNameActionPerformed
 
-    private void FindChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindChartActionPerformed
+    private void viewPatientChartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatientChartButtonActionPerformed
         // TODO add your handling code here:
         String first = pFName.getText();
         String last = pLName.getText();
@@ -205,32 +232,56 @@ public class CheckIn extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "User does not have required permissions to access the requested information");
         } 
-    }//GEN-LAST:event_FindChartActionPerformed
+    }//GEN-LAST:event_viewPatientChartButtonActionPerformed
 
     private void checkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInActionPerformed
         // TODO add your handling code here:
         //create bill
         String appts = "src/main/java/HealthCareSystem/appointments.txt";
+        String pcharts = "src/main/java/HealthCareSystem/patientCharts.txt";
         String outfile = "src/main/java/HealthCareSystem/output.txt";
         String temp = "src/main/java/HealthCareSystem/temp.txt";
-        String match = pFName.getText() + " " + pLName.getText();
+        String match = pFName.getText() + " " + pLName.getText() + " " + birthdate.getText();
+        String appt = CancelAppointment.getAppointment(match, appts, "Appointment");
         
         Boolean found = TreatmentRecord.recordExists(match, appts);
         if(found){
-            try {
-                String appt = CancelAppointment.getAppointment(match);
-                ViewPatientChart.storeWriteData(appt, temp, false);
-                CancelAppointment.updateDataFile(outfile, appts, temp);
-                appts = "src/main/java/HealthCareSystem/docAvailability.txt";
-                appt = appt.split(" ")[3] + " " + appt.split(" ")[4] + appt.split(" ")[5] + appt.split(" ")[6];
-                ViewPatientChart.storeWriteData(appt, temp, false);
-                CancelAppointment.updateDataFile(outfile, appts, temp);
-            } catch (IOException ex) {
-                Logger.getLogger(CheckIn.class.getName()).log(Level.SEVERE, null, ex);
+            LocalDate date = LocalDate.now();
+            String today = date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+            if(appt.split(" ")[5].compareTo(today) != 0){
+                JOptionPane.showConfirmDialog(null, "This appointment is scheduled for " + appt.split(" ")[6] + " on " + appt.split(" ")[5], "Check-In Not Allowed", 
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.PLAIN_MESSAGE);
             }
-            //generate billing info
-            //BillingInfo bi = new BillingInfo;
-            //bi.setVisible(true);
+            else{
+              found = TreatmentRecord.recordExists(match, pcharts);
+                if (found){
+
+                    Integer selection = JOptionPane.showConfirmDialog(null,"Do any changes need to be made to the patient chart?", "Update Patient Record?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+                    if (selection == JOptionPane.YES_OPTION){
+                        ViewPatientChart.showPatientChart(match);
+                    }
+                    else if(selection == JOptionPane.NO_OPTION){
+                        try {
+                            ViewPatientChart.storeWriteData(appt, temp, false);
+                            CancelAppointment.updateDataFile(outfile, appts, temp);
+                            appts = "src/main/java/HealthCareSystem/docAvailability.txt";
+                            appt = appt.split(" ")[3] + " " + appt.split(" ")[4] + " " + appt.split(" ")[5] + " " + appt.split(" ")[6];
+                            ViewPatientChart.storeWriteData(appt, temp, false);
+                            CancelAppointment.updateDataFile(outfile, appts, temp);
+                        } catch (IOException ex) {
+                            Logger.getLogger(CheckIn.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        generatePaymentInfo(match);       
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "No patient chart found for patient please create a patient chart.");
+                        PatientChart.getPatientData(match);
+                }  
+            }
         }
         else{
             Integer selection = JOptionPane.showConfirmDialog(null, "Appointment not found, would you like to schedule a new appointment?");
@@ -245,11 +296,99 @@ public class CheckIn extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_checkInActionPerformed
-    public static void generatePaymentInfo(){
-       CheckIn ci = new CheckIn();
-       String match = ci.pFName.getText() + " " + ci.pLName.getText();
-       String appt = CancelAppointment.getAppointment(match);
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void makePaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makePaymentButtonActionPerformed
+        // TODO add your handling code here:
+        setMakePaymentScreen();
+    }//GEN-LAST:event_makePaymentButtonActionPerformed
+    public static void generatePaymentInfo(String n){
+        String pcharts = "src/main/java/HealthCareSystem/patientCharts.txt";
+        String payinfo = "src/main/java/HealthCareSystem/paymentInfo.txt";
+        String appt = CancelAppointment.getAppointment(n, pcharts, "Patient chart");
+        String f = n.split(" ")[0];
+        String l = n.split(" ")[1];
+        String line = " ";
+        String ins = " ";
+        String ssn = " ";
+        String amt, ref = "HCS";
+        String patientId = " ";
+        String splitbday = n.split(" ")[2].split("/")[2].substring(2);
+        String paydata;
+        LocalDate date = LocalDate.now();
+        String today = date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        
+         try{
+            File charts = new File(pcharts);
+            Scanner scanner = new Scanner(charts);
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                if(line.equals(n)){
+                    ins = scanner.nextLine();
+                    ins = scanner.nextLine();
+                    ssn = scanner.nextLine();
+                    ssn = scanner.nextLine();
+                    ssn = scanner.nextLine();
+                    
+                }            
+            }
+            } catch (FileNotFoundException e) {
+                  System.out.println("An error occurred.");
+                  e.printStackTrace();
+            } 
+        System.out.println(ssn + " " + ins);
+        patientId = "hsc-" + f.charAt(0) + l.charAt(0) + splitbday + ssn.charAt(10);
+        if (ins != " "){
+            amt = "20.00";
+        }
+        else{
+            amt = "125.00";
+        }
+        for(int i = 0; i < 6; i++){
+            double doubleRandomNumber = Math.random() * 5;
+            Integer randomNumber = (int)doubleRandomNumber;
+            ref += randomNumber.toString();
+        }
+        
+        
+        
+        paydata = "Patient ID: " + patientId + "\n" +
+                  "Date: " + today + "\n" + 
+                  "Amount: $" + amt + "\n" +
+                  "Insurance: " + ins + "\n" +
+                  "Payment Type: \n" +
+                  "Reference Number: " + ref + "\n";
+        System.out.println(paydata);
+        
+
+        NewAppointment.writeToFile(payinfo, paydata, null, false);
+        //hcs-fl-last two of year last two of ssn ie hsc-jj8923
+        //find patient chart
+        //get Insurance if no ins out of pocket
+        //get today
+        //amount = 150 else amount copay = 20
+        //patient id, name, date, amount, payment type, and reference number
+       
     }
+    
+    public static void setMakePaymentScreen(){
+        CheckIn ci = new CheckIn();
+        ci.checkIn.hide();
+        ci.viewPatientChartButton.hide();
+        ci.setVisible(true);
+        //center the other two buttons
+        
+        
+        //buttons 
+            //Label payment type 
+                //options: cash, credit, debit 
+        //ci.
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -286,15 +425,17 @@ public class CheckIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton FindChart;
     private javax.swing.JFormattedTextField birthdate;
     private javax.swing.JButton checkIn;
+    private javax.swing.JButton closeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton makePaymentButton;
     private javax.swing.JTextField pFName;
     private javax.swing.JTextField pLName;
+    private javax.swing.JButton viewPatientChartButton;
     // End of variables declaration//GEN-END:variables
 }

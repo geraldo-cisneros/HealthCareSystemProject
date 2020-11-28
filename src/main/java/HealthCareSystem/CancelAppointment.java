@@ -219,7 +219,7 @@ public class CancelAppointment extends javax.swing.JFrame {
     public static void cancelAppointment(String infile, String outfile, String appt){
             try {
                 File oldFile = new File(infile);
-                File newFile= new File(outfile);
+                File newFile = new File(outfile);
                 Scanner myReader = new Scanner(oldFile);
                 String line;
                // Boolean found = false;
@@ -277,7 +277,7 @@ public class CancelAppointment extends javax.swing.JFrame {
             // if line is not present in delete.txt 
             // write it to output.txt 
             if(!hs.contains(line1)) 
-                pw.println(line1 + "\n"); 
+                pw.println(line1); 
             System.out.println(line1);
               
             line1 = br1.readLine(); 
@@ -295,20 +295,20 @@ public class CancelAppointment extends javax.swing.JFrame {
     }
         
     }
-    public static String getAppointment(String n){
+    public static String getAppointment(String n, String file, String type){
         TreatmentRecord tr = new TreatmentRecord();
         String line = " " , record = " ";
         Boolean found = false;
         try{
-            File charts = new File("src/main/java/HealthCareSystem/appointments.txt");
+            File charts = new File(file);
             Scanner scanner = new Scanner(charts);
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
-                if((line.split(" ")[0] + " " + line.split(" ")[1]).equals(n));
+                if(line.contains(n) || line.equals(n));
                     found = true;
                 }
             if (!found){
-                    JOptionPane.showMessageDialog(null, "Patient treatment record not found");
+                    JOptionPane.showMessageDialog(null, type + " not found");
             }
             record = line;
             
@@ -318,8 +318,6 @@ public class CancelAppointment extends javax.swing.JFrame {
         }
         return record; 
     }
-    
-    
     /**
      * @param args the command line arguments
      */

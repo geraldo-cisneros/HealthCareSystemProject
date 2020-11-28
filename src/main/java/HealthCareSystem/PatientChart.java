@@ -286,7 +286,7 @@ public class PatientChart extends javax.swing.JFrame {
                 "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
                 + add + "\nDoctor = " + doctor+ "\nSSN = " + social;        
         String newTreatment = "###\n" + first + " " + last + " " + bd + "\n" +
-                "Height = " + "\nWeight = " + "\nReason = " 
+                "Height = " + "\nWeight = " + "\nBlood Pressure = " + "\nReason = " 
                 + "\nTreatment = " + "\nRx= " + "\n###\n" ;
         
         Boolean found = TreatmentRecord.recordExists(flbday, treatFile);
