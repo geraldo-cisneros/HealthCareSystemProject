@@ -1,0 +1,25 @@
+Hello For this project we have set up the usernames to correspond to specific types of users:
+  usernames begining with:
+     01 are desk clerks 
+     02 - nurses
+     03 - doctors
+     04 - ceo
+Here are the user names for the program you can create more
+    012453 password1
+    023547 password2
+    039987 password3
+    044898 password4
+    
+Step 1 log in to the system: 
+  you will be greeted with the main interface where you can: 
+    create, change, canel appointments
+    check in the user 
+    update patient charts and treatment records (with required permissions)
+    collect the patients payment
+    and view the daily report (with required permission)
+    Simply select the desired option.
+    
+    
+  
+    
+  
