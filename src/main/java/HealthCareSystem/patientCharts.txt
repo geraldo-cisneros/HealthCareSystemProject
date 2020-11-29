@@ -1,12 +1,13 @@
-Jim James 11/12/1998
-Phone = 806-449-4393
-Insurance = BCBS
-Address = 139 21st 
-Doctor = J, Ward
-SSN = 943-39-2323
-Ellie Ward 11/28/1998
-Phone = 233-232-2323
-Insurance = Aetna
-Address = 1213 13th
+
+Sarah Jones 12/23/1999
+Phone = 806-794-9875
+Insurance = United
+Address = 2334
 Doctor = C, Loya
-SSN = 234-22-3213
+SSN = 453-23-1232
+Chris Garza 11/19/1992
+Phone = 806-434-3432
+Insurance = GEHA
+Address = 432 98th st
+Doctor = D, Skinner
+SSN = 345-87-2323

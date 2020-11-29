@@ -147,28 +147,21 @@ public class PatientChart extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(163, 163, 163)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6)
-                                    .addComponent(insuranceProvider, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(phoneNumber)
-                                    .addComponent(bday)
-                                    .addComponent(pFName)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(337, 337, 337)
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(saveChartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)))
+                        .addGap(163, 163, 163)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6)
+                            .addComponent(insuranceProvider, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(phoneNumber)
+                            .addComponent(bday)
+                            .addComponent(pFName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
@@ -178,6 +171,12 @@ public class PatientChart extends javax.swing.JFrame {
                     .addComponent(ssn)
                     .addComponent(docList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(144, 144, 144))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(saveChartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(258, 258, 258))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,12 +259,13 @@ public class PatientChart extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        String file = "src/main/java/HealthCareSystem/patientCharts.txt";
-        String tempfile = "src/main/java/HealthCareSystem/temp.txt";
-        String temp; 
-        
-        recoverDataOnCancel(tempfile, file);
-        //ViewPatientChart.storeWriteData(temp, file, true);
+//        String file = "src/main/java/HealthCareSystem/patientCharts.txt";
+//        String tempfile = "src/main/java/HealthCareSystem/temp.txt";
+//        String temp; 
+//        
+//        
+//        recoverDataOnCancel(tempfile, file);
+//        //ViewPatientChart.storeWriteData(temp, file, true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -281,19 +281,41 @@ public class PatientChart extends javax.swing.JFrame {
         
         String treatFile = "src/main/java/HealthCareSystem/treatmentRecords.txt";
         String chartFile = "src/main/java/HealthCareSystem/patientCharts.txt";
+        String temp = "src/main/java/HealthCareSystem/temp.txt";
+        String outfile = "src/main/java/HealthCareSystem/output.txt";
         String flbday = first + " " + last + " " + bd;
+        String oldChart = getPatientChart(flbday);
+        System.out.println("OLDCHART: " + oldChart);
+        
         String newChart = "\n"+ first + " " + last + " " + bd + "\n" +
                 "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
                 + add + "\nDoctor = " + doctor+ "\nSSN = " + social;        
+        
         String newTreatment = "###\n" + first + " " + last + " " + bd + "\n" +
                 "Height = " + "\nWeight = " + "\nBlood Pressure = " + "\nReason = " 
                 + "\nTreatment = " + "\nRx= " + "\n###\n" ;
         
-        Boolean found = TreatmentRecord.recordExists(flbday, treatFile);
+        Boolean found; 
+        System.out.println("Here 1");
+        found = TreatmentRecord.recordExists(flbday, chartFile);
+         System.out.println("Here 2" + found);
+        if(found){
+            try {
+            ViewPatientChart.storeWriteData(oldChart, temp, false);
+            CancelAppointment.updateDataFile(outfile, chartFile, temp);
+            ViewPatientChart.storeWriteData(newChart, chartFile, true);
+            } catch (IOException ex) {
+                Logger.getLogger(ViewPatientChart.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             System.out.println("Here 3: made it of write to file" );
+        }
+        else{
+            ViewPatientChart.storeWriteData(newChart, chartFile, true);
+        }
         
-        NewAppointment.writeToFile(chartFile, newChart, "Patient Chart", true);
+        found = TreatmentRecord.recordExists(flbday, treatFile);
         if(!found){
-          NewAppointment.writeToFile(treatFile, newTreatment, "Treatment Record", true);  
+          ViewPatientChart.storeWriteData(newTreatment, treatFile, true);
         }
         this.dispose();
     }//GEN-LAST:event_saveChartButtonActionPerformed
@@ -331,9 +353,11 @@ public class PatientChart extends javax.swing.JFrame {
         pc.pFName.setText(n.split(" ")[0]);
         pc.pLName.setText(n.split(" ")[1]);
         pc.bday.setText(n.split(" ")[2]);
+        pc.ssn.setText(n.split(" ")[3]);
         
         pc.setVisible(true);
     }
+    
     
     public static void recoverDataOnCancel(String getfile, String setfile){
         FileInputStream inStream = null;
@@ -370,6 +394,45 @@ public class PatientChart extends javax.swing.JFrame {
         }
     }
     
+    public static String getPatientChart(String n){
+        String line;
+        String firstlastbday = " ", pn= " ", ip= " ",add = " ",  
+               doctor = " ", social = " ",record = " ";
+//        String newChart = "\n"+ first + " " + last + " " + bd + "\n" +
+//                "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
+//                + add + "\nDoctor = " + doctor+ "\nSSN = " + social;  
+        Boolean found = false;
+        try{
+            File charts = new File("src/main/java/HealthCareSystem/treatmentRecords.txt");
+            Scanner scanner = new Scanner(charts);
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                if(line.equals(n)){
+                    found = true;
+                    firstlastbday = line;
+                    pn = scanner.nextLine();
+                    ip = scanner.nextLine();
+                    add = scanner.nextLine();
+                    doctor = scanner.nextLine();
+                    social = scanner.nextLine();
+                }
+                
+            }
+            scanner.close();
+            if (!found){
+                    JOptionPane.showMessageDialog(null, "Patient treatment record not found");
+            }
+            record = firstlastbday + "\n" +
+                     pn + "\n" + ip + "\n" + add + "\n" + doctor + 
+                     "\n" + social;
+            
+        }catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        System.out.println("chart = " + record);
+        return record; 
+    }
     
     /**
      * @param args the command line arguments

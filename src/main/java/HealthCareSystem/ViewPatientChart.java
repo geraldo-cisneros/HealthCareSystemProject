@@ -182,7 +182,6 @@ public class ViewPatientChart extends javax.swing.JFrame {
 
     private void updateChartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChartButtonActionPerformed
         // TODO add your handling code here:
-         // TODO add your handling code here:
         //copy all except old chart to new file
         //update patient info
         //save to new file
@@ -195,31 +194,32 @@ public class ViewPatientChart extends javax.swing.JFrame {
         String add = address.getText();
         String doc = doctor.getText();
         String ssn = social.getText();
+        String init = first + " " + last + " " + bd + " " + ssn;
+//        String chart = "src/main/java/HealthCareSystem/patientCharts.txt";
+//        String temp = "src/main/java/HealthCareSystem/temp.txt";
+//        String output = "src/main/java/HealthCareSystem/output.txt";
+//        String data = TreatmentRecord.getTreatmentRecord(first + " " + last + " " + bd);
         
-        String chart = "src/main/java/HealthCareSystem/patientCharts.txt";
-        String temp = "src/main/java/HealthCareSystem/temp.txt";
-        String output = "src/main/java/HealthCareSystem/output.txt";
-        String data = TreatmentRecord.getTreatmentRecord(first + " " + last + " " + bd);
-        PatientChart pc = new PatientChart();
-        
-        String oldChart = first + " " + last + " " + bd + "\n" +
-                "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
-                + add + "\nDoctor = " + doc+ "\nSSN = " + ssn + "\n";
-        String init = first + " " + last + " " + bd;
-        
-        storeWriteData(oldChart, temp, false);
-        try {
-            CancelAppointment.updateDataFile(output, chart, temp);
-            
-            storeWriteData(data, temp, false);
-            chart = "src/main/java/HealthCareSystem/treatmentRecords.txt";
-            CancelAppointment.updateDataFile(output, chart, temp);
-        } catch (IOException ex) {
-            Logger.getLogger(ViewPatientChart.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        storeWriteData(data, chart, true);
-        storeWriteData(oldChart, temp, false);
         PatientChart.getPatientData(init);
+        
+//        String oldChart = first + " " + last + " " + bd + "\n" +
+//                "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
+//                + add + "\nDoctor = " + doc+ "\nSSN = " + ssn + "\n";
+//        
+//        
+//            storeWriteData(oldChart, temp, false);
+//        try {
+//            CancelAppointment.updateDataFile(output, chart, temp);
+//            
+//            storeWriteData(data, temp, false);
+//            chart = "src/main/java/HealthCareSystem/treatmentRecords.txt";
+//            CancelAppointment.updateDataFile(output, chart, temp);
+//        } catch (IOException ex) {
+//            Logger.getLogger(ViewPatientChart.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        storeWriteData(data, chart, true);
+//        storeWriteData(oldChart, temp, false);
+        
         
     }//GEN-LAST:event_updateChartButtonActionPerformed
 

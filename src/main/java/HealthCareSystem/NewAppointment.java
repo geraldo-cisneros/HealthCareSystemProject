@@ -80,8 +80,7 @@ public class NewAppointment extends javax.swing.JFrame {
 
         jLabel6.setText("Patient Last Name");
 
-        date.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("M/d/yyyy"))));
-        date.setText("MM/DD/YYYY");
+        date.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
         date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateActionPerformed(evt);

@@ -1,1 +1,181 @@
-C, Loya 11/28/2020 10:00
+       String first = pFName.getText();
+        String last = pLName.getText();
+        String bd = bday.getText();
+        String pn = phoneNumber.getText();
+        String ip = insuranceProvider.getText();
+        String add = address.getText();
+        String doctor = docList.getSelectedItem().toString();
+        String social = ssn.getText();
+        
+        String treatFile = "src/main/java/HealthCareSystem/treatmentRecords.txt";
+        String chartFile = "src/main/java/HealthCareSystem/patientCharts.txt";
+        String temp = "src/main/java/HealthCareSystem/temp.txt";
+        String outfile = "src/main/java/HealthCareSystem/output.txt";
+        String flbday = first + " " + last + " " + bd;
+        String oldChart = getPatientChart(flbday);
+        String newChart = "\n"+ first + " " + last + " " + bd + "\n" +
+                "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
+                + add + "\nDoctor = " + doctor+ "\nSSN = " + social;        
+        String newTreatment = "###\n" + first + " " + last + " " + bd + "\n" +
+                "Height = " + "\nWeight = " + "\nBlood Pressure = " + "\nReason = " 
+                + "\nTreatment = " + "\nRx= " + "\n###\n" ;
+        
+        Boolean found = TreatmentRecord.recordExists(flbday, treatFile);
+       
+        ViewPatientChart.storeWriteData(oldChart, temp, false);
+        CancelAppointment.updateDataFile(outfile, chartFile, temp);
+        ViewPatientChart.storeWriteData(newChart, chartFile, true);
+        
+        if(!found){
+          ViewPatientChart.storeWriteData(newTreatment, treatFile, true);
+        }
+        this.dispose();
+    }                                               
+
+    public static void showPatientChart(String n){
+        Map<String, String> personMap = new LinkedHashMap<String, String>();
+        String line;
+        PatientChart pc = new PatientChart();
+        try{
+            File charts = new File("src/main/java/HealthCareSystem/patientCharts.txt");
+            Scanner scanner = new Scanner(charts);
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                if(line.equals(n)){
+                    pc.setVisible(true);
+                    pc.pFName.setText(line.split(" ")[0]);
+                    pc.pLName.setText(line.split(" ")[1]);
+                    pc.bday.setText(line.split(" ")[2]);
+                    pc.phoneNumber.setText(scanner.nextLine().split(" = ")[1]);
+                    pc.insuranceProvider.setText(scanner.nextLine().split(" = ")[1]);
+                    pc.address.setText(scanner.nextLine().split(" = ")[1]);
+                    pc.docList.setSelectedItem(scanner.nextLine().split(" = ")[1]);
+                    pc.ssn.setText(scanner.nextLine().split(" = ")[1]);
+                }
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void getPatientData(String n){
+        PatientChart pc = new PatientChart();
+        
+        pc.pFName.setText(n.split(" ")[0]);
+        pc.pLName.setText(n.split(" ")[1]);
+        pc.bday.setText(n.split(" ")[2]);
+        pc.ssn.setText(n.split(" ")[3]);
+        
+        pc.setVisible(true);
+    }
+    
+    
+    public static void recoverDataOnCancel(String getfile, String setfile){
+        FileInputStream inStream = null;
+        FileOutputStream outStream = null;
+
+        try {
+                //Files objects
+                File inputFile = new File(getfile);
+                File outFile = new File(setfile);
+
+                //Intialize input and output streams
+                inStream = new FileInputStream(inputFile);
+                outStream = new FileOutputStream(outFile);
+
+                //The buffer size for reading data
+                byte[] buffer = new byte[1024];
+
+                int length;
+                //Copy data to another file
+                while ((length = inStream.read(buffer)) > 0) {
+                        outStream.write(buffer, 0, length);
+                }
+
+                // Closing the input/output file streams
+                inStream.close();
+                outStream.close();
+
+                System.out.println("Written Content to another file.");
+
+        } catch (IOException e) {
+                e.printStackTrace();
+
+
+        }
+    }
+    
+    public static String getPatientChart(String n){
+        String line;
+        String firstlastbday = " ", pn= " ", ip= " ",add = " ",  
+               doctor = " ", social = " ",record = " ";
+//        String newChart = "\n"+ first + " " + last + " " + bd + "\n" +
+//                "Phone = " + pn + "\nInsurance = " + ip + "\nAddress = " 
+//                + add + "\nDoctor = " + doctor+ "\nSSN = " + social;  
+        Boolean found = false;
+        try{
+            File charts = new File("src/main/java/HealthCareSystem/treatmentRecords.txt");
+            Scanner scanner = new Scanner(charts);
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                if(line.equals(n)){
+                    found = true;
+                    firstlastbday = line;
+                    pn = scanner.nextLine();
+                    ip = scanner.nextLine();
+                    add = scanner.nextLine();
+                    doctor = scanner.nextLine();
+                    social = scanner.nextLine();
+                }
+                scanner.close();
+            }
+            if (!found){
+                    JOptionPane.showMessageDialog(null, "Patient treatment record not found");
+            }
+            record = firstlastbday + "\n" +
+                     pn + "\n" + ip + "\n" + add + "\n" + doctor + 
+                     "\n" + social;
+            
+        }catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        System.out.println("chart = " + record);
+        return record; 
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PatientChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PatientChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PatientChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PatientChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PatientChart().setVisible(true);
+            }
+        });
+    }

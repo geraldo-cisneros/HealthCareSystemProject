@@ -1,0 +1,6 @@
+Patient ID: hsc-JS979
+Date: 11/28/2020
+Amount: $20.00
+Insurance: Insurance = United
+Payment Type: 
+Reference Number: HCS432424
