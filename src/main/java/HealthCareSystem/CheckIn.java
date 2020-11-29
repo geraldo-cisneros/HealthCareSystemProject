@@ -283,7 +283,7 @@ public class CheckIn extends javax.swing.JFrame {
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "No patient chart found for patient please create a patient chart.");
-                        PatientChart.getPatientData(match);
+                        PatientChart.getPatientData(match, false);
                 }  
             }
         }

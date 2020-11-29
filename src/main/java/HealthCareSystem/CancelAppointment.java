@@ -20,6 +20,8 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,7 +56,7 @@ public class CancelAppointment extends javax.swing.JFrame {
         docList = new javax.swing.JComboBox<>();
         time = new javax.swing.JTextField();
         date = new javax.swing.JTextField();
-        cancelAppt = new javax.swing.JButton();
+        submitCancelButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -62,6 +64,9 @@ public class CancelAppointment extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         pName1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        birthdate = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cancelButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,10 +76,10 @@ public class CancelAppointment extends javax.swing.JFrame {
             }
         });
 
-        cancelAppt.setText("Cancel");
-        cancelAppt.addActionListener(new java.awt.event.ActionListener() {
+        submitCancelButton.setText("Submit");
+        submitCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelApptActionPerformed(evt);
+                submitCancelButtonActionPerformed(evt);
             }
         });
 
@@ -90,41 +95,58 @@ public class CancelAppointment extends javax.swing.JFrame {
 
         jLabel4.setText("Time");
 
+        jLabel8.setText("Birth Date");
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pName1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(cancelAppt)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(time, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(docList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pName1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(time, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(docList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(55, 55, 55)
+                                        .addComponent(jLabel5))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                        .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(159, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(submitCancelButton)
+                .addGap(42, 42, 42)
+                .addComponent(cancelButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,21 +161,29 @@ public class CancelAppointment extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(pName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(docList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(docList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(cancelAppt)
-                .addContainerGap(101, Short.MAX_VALUE))
+                    .addComponent(submitCancelButton)
+                    .addComponent(cancelButton))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,36 +193,48 @@ public class CancelAppointment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
 
-    private void cancelApptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelApptActionPerformed
+    private void submitCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitCancelButtonActionPerformed
         // TODO add your handling code here:
         String first = pName.getText();
         String last = pName1.getText();
+        String bday = birthdate.getText();
         String doc = docList.getSelectedItem().toString();
         String d = date.getText();
         String t = time.getText();
+         
+        String temp = "src/main/java/HealthCareSystem/temp.txt";
+        String match = first + " " + last + " " + bday + " " + doc + " "+ d + " " + t;
+        String appts = "src/main/java/HealthCareSystem/appointments.txt";
+        String outfile = "src/main/java/HealthCareSystem/output.txt";
         
         
-        String oldFile = "src/main/java/HealthCareSystem/appointments.txt";
-        String newFile = "src/main/java/HealthCareSystem/temp.txt";
-        String appt = first + ' ' + last + ' ' + doc + ' ' + d + ' ' + t;
-        
-        Boolean foundAppt = findAppointment(oldFile, appt);
-        if (foundAppt == true){
-            cancelAppointment(oldFile, newFile, appt);
-
-            oldFile = "src/main/java/HealthCareSystem/docAvailability.txt";
-            appt = doc + ' ' + d + ' ' + t;
-
-            cancelAppointment(oldFile, newFile, appt);
-            this.dispose();
-            JOptionPane.showMessageDialog(null, "The appointment for " + first + " " + last + " with Dr." + doc + " on " + d + " at " + t 
-            + " has been successfully cancelled.");
+         Boolean found = TreatmentRecord.recordExists(match, appts);
+       
+        if(found){
+            try {
+                String appt = CancelAppointment.getAppointment(match, appts, "Appointment");
+                ViewPatientChart.storeWriteData(appt, temp, false);
+                CancelAppointment.updateDataFile(outfile, appts, temp);
+                appts = "src/main/java/HealthCareSystem/docAvailability.txt";
+                appt = appt.split(" ")[3] + " " + appt.split(" ")[4] + " " + appt.split(" ")[5] + " " + appt.split(" ")[6];
+                ViewPatientChart.storeWriteData(appt, temp, false);
+                CancelAppointment.updateDataFile(outfile, appts, temp);
+                JOptionPane.showMessageDialog(null, "Appointment cancelled.");
+               
+            } catch (IOException ex) {
+                Logger.getLogger(CheckIn.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else{
-            JOptionPane.showMessageDialog(null, "No appointment found, check appointment details or create a new appointment.");
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "No appointment found. Date and time available.");
         }
-    }//GEN-LAST:event_cancelApptActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_submitCancelButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
     public static Boolean findAppointment(String infile, String appt){
         Boolean found = false;
         try {
@@ -355,7 +397,8 @@ public class CancelAppointment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelAppt;
+    private javax.swing.JTextField birthdate;
+    private javax.swing.JToggleButton cancelButton;
     private javax.swing.JTextField date;
     private javax.swing.JComboBox<String> docList;
     private javax.swing.JLabel jLabel1;
@@ -364,8 +407,10 @@ public class CancelAppointment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField pName;
     private javax.swing.JTextField pName1;
+    private javax.swing.JButton submitCancelButton;
     private javax.swing.JTextField time;
     // End of variables declaration//GEN-END:variables
 }

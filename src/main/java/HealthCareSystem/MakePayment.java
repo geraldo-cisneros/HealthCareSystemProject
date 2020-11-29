@@ -267,8 +267,9 @@ public class MakePayment extends javax.swing.JFrame {
             String outfile =  "src/main/java/HealthCareSystem/output.txt";
             File t = new File(temp);
             String old = getPaymentInfo(pid);
-            ref = pid.split("\n")[5].split(": ")[1];
-            System.out.println(ref);
+            System.out.println("pid: " + pid);
+            //ref = pid.split("\n")[5].split(": ")[1];
+            //System.out.println("Ref: " + ref);
             if (pid.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Must enter patient ID to proceed.");
             }

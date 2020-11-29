@@ -58,6 +58,7 @@ public class NewAppointment extends javax.swing.JFrame {
         time = new javax.swing.JTextField();
         BirthDate = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,13 @@ public class NewAppointment extends javax.swing.JFrame {
 
         jLabel7.setText("Birth Date");
 
+        jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +124,9 @@ public class NewAppointment extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(submitNewAppt)
-                        .addGap(98, 98, 98))
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton1)
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
@@ -157,7 +167,9 @@ public class NewAppointment extends javax.swing.JFrame {
                     .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(61, 61, 61)
-                .addComponent(submitNewAppt)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(submitNewAppt)
+                    .addComponent(jButton1))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
@@ -193,6 +205,11 @@ public class NewAppointment extends javax.swing.JFrame {
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void writeToFile(String setfile, String data, String type, Boolean showPane ){
         try {
@@ -247,6 +264,7 @@ public class NewAppointment extends javax.swing.JFrame {
     private javax.swing.JTextField BirthDate;
     private javax.swing.JFormattedTextField date;
     private javax.swing.JComboBox<String> docList;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

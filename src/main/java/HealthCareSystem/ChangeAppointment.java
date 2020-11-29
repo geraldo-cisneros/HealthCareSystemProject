@@ -60,6 +60,7 @@ public class ChangeAppointment extends javax.swing.JFrame {
         docList = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         birthDate = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,13 @@ public class ChangeAppointment extends javax.swing.JFrame {
         jLabel6.setText("Patient Last Name");
 
         jLabel7.setText("Birth Date");
+
+        jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,11 +139,13 @@ public class ChangeAppointment extends javax.swing.JFrame {
                             .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(159, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 285, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(findAppt)
-                        .addGap(299, 299, 299))
+                        .addComponent(findAppt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jButton1)
+                        .addGap(184, 184, 184))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(281, 281, 281))))
@@ -170,7 +180,9 @@ public class ChangeAppointment extends javax.swing.JFrame {
                     .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(43, 43, 43)
-                .addComponent(findAppt)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(findAppt)
+                    .addComponent(jButton1))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
@@ -230,6 +242,11 @@ public class ChangeAppointment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -271,6 +288,7 @@ public class ChangeAppointment extends javax.swing.JFrame {
     private javax.swing.JTextField date;
     private javax.swing.JComboBox<String> docList;
     private javax.swing.JButton findAppt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

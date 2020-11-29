@@ -17,3 +17,21 @@ Reason =
 Treatment = 
 Rx= 
 ###
+###
+Geraldo Cisneros 05/09/1995
+Height = 
+Weight = 
+Blood Pressure = 
+Reason = 
+Treatment = 
+Rx= 
+###
+###
+Eric Michaels 03/23/1994
+Height = 
+Weight = 
+Blood Pressure = 
+Reason = 
+Treatment = 
+Rx= 
+###

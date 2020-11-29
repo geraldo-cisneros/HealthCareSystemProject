@@ -7,6 +7,7 @@ HealthCareSystem/EmployeeLogin$3.class
 HealthCareSystem/MakePayment$3.class
 HealthCareSystem/MakePayment$7.class
 HealthCareSystem/MainInterface$10.class
+HealthCareSystem/NewAppointment$4.class
 HealthCareSystem/CheckIn$5.class
 HealthCareSystem/MainInterface$9.class
 HealthCareSystem/TreatmentRecord.class
@@ -17,6 +18,7 @@ HealthCareSystem/MakePayment$6.class
 HealthCareSystem/MainInterface$8.class
 HealthCareSystem/UpdateMeasurements$3.class
 HealthCareSystem/MainInterface.class
+HealthCareSystem/ChangeAppointment$4.class
 HealthCareSystem/TreatmentRecord$2.class
 HealthCareSystem/BillingInfo$1.class
 HealthCareSystem/MakePayment$5.class
@@ -24,6 +26,7 @@ HealthCareSystem/EmployeeLogin$1.class
 HealthCareSystem/UpdateMeasurements$4.class
 HealthCareSystem/MakePayment$1.class
 HealthCareSystem/ViewPatientChart$4.class
+HealthCareSystem/CancelAppointment$4.class
 HealthCareSystem/TreatmentRecord$3.class
 HealthCareSystem/MainInterface$12.class
 HealthCareSystem/MakePayment$9.class
@@ -36,4 +39,5 @@ HealthCareSystem/TreatmentRecord$4.class
 HealthCareSystem/UpdateMeasurements$2.class
 HealthCareSystem/MakePayment$2.class
 HealthCareSystem/MakePayment$8.class
+HealthCareSystem/UpdateAppointment$4.class
 HealthCareSystem/MainInterface$11.class

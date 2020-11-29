@@ -11,3 +11,15 @@ Insurance = GEHA
 Address = 432 98th st
 Doctor = D, Skinner
 SSN = 345-87-2323
+Geraldo Cisneros 05/09/1995
+Phone = 806-555-5555
+Insurance = United
+Address = 123 st
+Doctor = J, Ward
+SSN = 342-44-4444
+Eric Michaels 03/23/1994
+Phone = 555-555-5555
+Insurance = BCBS
+Address = 133 fake st
+Doctor = J, Ward
+SSN = 222-22-2222

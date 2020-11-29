@@ -1,6 +1,11 @@
 Patient ID: hsc-JS979
-Date: 11/28/2020
-Amount: $20.00
-Insurance: Insurance = United
-Payment Type: 
+Amount: $75.00
+Insurance: United
+Payment Type: Debit
 Reference Number: HCS432424
+Patient ID: hsc-EM942
+Date: 11/28/2020
+Amount: $65.00
+Insurance: BCBS
+Payment Type: Debit
+Reference Number: HCS312312

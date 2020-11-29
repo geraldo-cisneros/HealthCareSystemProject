@@ -145,22 +145,17 @@ public class PatientChart extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel6)
-                            .addComponent(insuranceProvider, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                            .addComponent(phoneNumber)
-                            .addComponent(bday)
-                            .addComponent(pFName)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(337, 337, 337)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(163, 163, 163)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6)
+                    .addComponent(insuranceProvider, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(phoneNumber)
+                    .addComponent(bday)
+                    .addComponent(pFName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
@@ -177,6 +172,10 @@ public class PatientChart extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(258, 258, 258))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(337, 337, 337)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,14 +257,7 @@ public class PatientChart extends javax.swing.JFrame {
     }//GEN-LAST:event_insuranceProviderActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
-//        String file = "src/main/java/HealthCareSystem/patientCharts.txt";
-//        String tempfile = "src/main/java/HealthCareSystem/temp.txt";
-//        String temp; 
-//        
-//        
-//        recoverDataOnCancel(tempfile, file);
-//        //ViewPatientChart.storeWriteData(temp, file, true);
+       
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -296,10 +288,8 @@ public class PatientChart extends javax.swing.JFrame {
                 + "\nTreatment = " + "\nRx= " + "\n###\n" ;
         
         Boolean found; 
-        System.out.println("Here 1");
         found = TreatmentRecord.recordExists(flbday, chartFile);
-         System.out.println("Here 2" + found);
-        if(found){
+            if(found){
             try {
             ViewPatientChart.storeWriteData(oldChart, temp, false);
             CancelAppointment.updateDataFile(outfile, chartFile, temp);
@@ -307,7 +297,7 @@ public class PatientChart extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(ViewPatientChart.class.getName()).log(Level.SEVERE, null, ex);
             }
-             System.out.println("Here 3: made it of write to file" );
+             
         }
         else{
             ViewPatientChart.storeWriteData(newChart, chartFile, true);
@@ -321,7 +311,6 @@ public class PatientChart extends javax.swing.JFrame {
     }//GEN-LAST:event_saveChartButtonActionPerformed
 
     public static void showPatientChart(String n){
-        Map<String, String> personMap = new LinkedHashMap<String, String>();
         String line;
         PatientChart pc = new PatientChart();
         try{
@@ -347,15 +336,17 @@ public class PatientChart extends javax.swing.JFrame {
         }
     }
 
-    public static void getPatientData(String n){
+    public static void getPatientData(String n, Boolean s){
         PatientChart pc = new PatientChart();
         
         pc.pFName.setText(n.split(" ")[0]);
         pc.pLName.setText(n.split(" ")[1]);
         pc.bday.setText(n.split(" ")[2]);
-        pc.ssn.setText(n.split(" ")[3]);
-        
         pc.setVisible(true);
+        if (s){
+            pc.ssn.setText(n.split(" ")[3]);
+        }
+        
     }
     
     
